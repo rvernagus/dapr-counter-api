@@ -6,4 +6,22 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5080:5000"
+      - "5000:5000"
+    networks:
+      - app-network
+
+  dapr:
+    image: "daprio/daprd:edge"
+    command: [
+      "./daprd",
+     "-app-id", "dapr-counter-api",
+     "-app-port", "5000",
+     "dotnet", "dapr-counter-api"
+     ]
+    volumes:
+        - ".:/App" # Mount our components folder for the runtime to use
+    network_mode: "service:web" # Attach the nodeapp-dapr service to the nodeapp network namespace
+
+networks:
+  app-network:
+    driver: bridge
