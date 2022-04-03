@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapr.Client" Version="1.6.0" />
+    <Content Include="statestore.yaml" CopyToPublishDirectory="Always" />
   </ItemGroup>
 
 </Project>
